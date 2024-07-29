@@ -1,9 +1,3 @@
-'''
-recbole.utils.url
-################################
-Reference code:
-    https://github.com/snap-stanford/ogb/blob/master/ogb/utils/url.py
-'''
 
 import urllib.request as ur
 import zipfile

@@ -1,12 +1,4 @@
-# -*- encoding: utf-8 -*-
-# @Time    :   2020/11/1
-# @Author  :   Kaiyuan Li
-# @email   :   tsotfsk@outlook.com
 
-# UPDATE
-# @Time    :    2021/7/2, 2021/7/5
-# @Author  :    Zihan Lin, Zhichao Feng
-# @email   :    zhlin@ruc.edu.cn, fzcbupt@gmail.com
 
 import os
 import sys

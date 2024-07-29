@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-# @Time   : 2020/11/18
-# @Author : Xingyu Pan
-# @Email  : panxy@ruc.edu.cn
 
 
 import os

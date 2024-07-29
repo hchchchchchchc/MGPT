@@ -1,11 +1,4 @@
-# @Time   : 2020/10/19
-# @Author : Shanlei Mu
-# @Email  : slmu@ruc.edu.cn
 
-# UPDATE:
-# @Time   : 2021/7/1
-# @Author : Xingyu Pan
-# @Email  : xy_pan@foxmail.com
 
 import os
 import unittest

@@ -1,12 +1,4 @@
-# -*- coding: utf-8 -*-
-# @Time   : 2020/10/24
-# @Author : Shanlei Mu
-# @Email  : slmu@ruc.edu.cn
 
-# UPDATE
-# @Time    :   2020/11/17
-# @Author  :   Xingyu Pan
-# @email   :   panxy@ruc.edu.cn
 
 import os
 import unittest

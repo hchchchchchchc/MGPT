@@ -1,12 +1,4 @@
-# -*- encoding: utf-8 -*-
-# @Time    :   2020/11/1
-# @Author  :   Kaiyuan Li
-# @email   :   tsotfsk@outlook.com
 
-# UPDATE:
-# @Time   : 2021/7/1
-# @Author : Xingyu Pan
-# @Email  : xy_pan@foxmail.com
 
 import os
 import sys

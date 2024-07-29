@@ -1,6 +1,4 @@
-# @Time   : 2020/10/6
-# @Author : Shanlei Mu
-# @Email  : slmu@ruc.edu.cn
+
 
 """
 recbole.quick_start

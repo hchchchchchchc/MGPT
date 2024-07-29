@@ -1,12 +1,3 @@
-# -*- encoding: utf-8 -*-
-# @Time    :   2020/12/21
-# @Author  :   Zhichao Feng
-# @email   :   fzcbupt@gmail.com
-
-# UPDATE:
-# @Time   : 2021/7/1
-# @Author : Xingyu Pan
-# @Email  : xy_pan@foxmail.com
 
 import os
 import sys
