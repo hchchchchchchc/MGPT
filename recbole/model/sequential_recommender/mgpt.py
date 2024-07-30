@@ -35,8 +35,7 @@ class MGPT(SequentialRecommender):
         self.loss_type = config['loss_type']
         self.initializer_range = config['initializer_range']
 
-        # self.hglen = config['hyper_len']
-        # self.enable_hg = config['enable_hg']
+
         self.enable_ms = config['enable_ms']
         self.dataset = config['dataset']
 
