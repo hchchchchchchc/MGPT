@@ -85,8 +85,6 @@ class MGPT(SequentialRecommender):
             self.sw_before = 20
             self.sw_follow = 12
 
-        # self.hypergraphs = dict()
-        # we only need compute the loss at the masked position
         try:
             assert self.loss_type in ['BPR', 'CE']
         except AssertionError:
@@ -98,8 +96,6 @@ class MGPT(SequentialRecommender):
     def _init_weights(self, module):
         """ Initialize the weights """
         if isinstance(module, (nn.Linear, nn.Embedding)):
-            # Slightly different from the TF version which uses truncated_normal for initialization
-            # cf https://github.com/pytorch/pytorch/pull/5617
             module.weight.data.normal_(mean=0.0, std=self.initializer_range)
         elif isinstance(module, nn.LayerNorm):
             module.bias.data.zero_()
@@ -156,12 +152,10 @@ class MGPT(SequentialRecommender):
         masked_index = []
 
         for instance_idx, instance in enumerate(sequence_instances):
-            # WE MUST USE 'copy()' HERE!
             masked_sequence = instance.copy()
             pos_item = []
             index_ids = []
             for index_id, item in enumerate(instance):
-                # padding is 0, the sequence is end
                 if index_id == n_objs[instance_idx] - 1:
                     pos_item.append(item)
                     masked_sequence[index_id] = self.mask_token
