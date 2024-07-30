@@ -17,7 +17,6 @@ class MGPT(SequentialRecommender):
         super(MGPT, self).__init__(config, dataset)
 
         # load parameters info
-        self.adj_l1 = None
         self.n_layers = config['n_layers']
         self.n_heads = config['n_heads']
         self.hidden_size = config['hidden_size']  # same as embedding_size
@@ -207,7 +206,7 @@ class MGPT(SequentialRecommender):
         position_embedding = self.position_embedding(position_ids)
         type_embedding = self.type_embedding(type_seq)
         item_emb = self.item_embedding(item_seq)
-        # 构造邻接矩阵
+        # adj matrix
         mask = (item_seq > 0).long()
         sqlen = item_emb.shape[1]
         item_l = torch.repeat_interleave(item_emb.unsqueeze(2), sqlen, 2)
@@ -220,7 +219,7 @@ class MGPT(SequentialRecommender):
         adj = adj * torch.unsqueeze(mask, 1)
         adj = adj * torch.unsqueeze(mask, 2)
         self.adj_l1 = torch.norm(adj, p=1)
-        # normalize
+
         adj = adj + torch.unsqueeze(torch.eye(sqlen), 0).to("cuda:0")
         rowsum = torch.sum(adj, 1)
         d_inv_sqrt = torch.pow(rowsum, -0.5)
@@ -229,7 +228,7 @@ class MGPT(SequentialRecommender):
         d_mat_inv_sqrt = torch.diag_embed(d_inv_sqrt)
         norm_adg = torch.matmul(d_mat_inv_sqrt, adj)
         graph_init_embedding = item_emb + type_embedding
-        # 构造邻接矩阵
+        # adj matrix
         hgnn_embs = self.MLGCN_layer(graph_init_embedding, norm_adg, self.item_level)
 
 
@@ -387,10 +386,7 @@ class MGPT(SequentialRecommender):
             output = torch.stack(output, dim=0)
             test_items_emb = self.item_embedding(candidates)  # delete masked token
             scores, index = torch.max(torch.matmul(output.transpose(0, 1), test_items_emb.transpose(1, 2)), dim=1)
-            np.savetxt('/home/hc/PycharmProjects/M-GPT/ijcai_dependency.csv',
-                       torch.mean(torch.matmul(output.transpose(0, 1), test_items_emb.transpose(1, 2)).transpose(1,2), dim=0, keepdim=False).cpu().detach().numpy(),
-                       fmt='%.3f',
-                       delimiter=',')
+
         if self.agg_method == 'atten':
             seq_output = self.gather_indexes(seq_output, item_seq_len)  # [B H]
             test_items_emb = self.item_embedding(candidates)  # delete masked token
